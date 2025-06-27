@@ -1,12 +1,14 @@
 import streamlit as st
-from api_client import get_todos, create_todo, update_todo, delete_todo
+from api_client import get_todos, create_todo, update_todo, delete_todo, get_user_profile
 
 def todo_list_screen():
     st.title("📝 My Todo List")
     
     col1, col2 = st.columns([3, 1])
     with col1:
-        st.write(f"Welcome, {st.session_state.user_email}!")
+        profile_data = get_user_profile()
+        display_name = profile_data['name'] if profile_data else st.session_state.user_email
+        st.write(f"Welcome, {display_name}!")
     with col2:
         if st.button("Logout"):
             st.session_state.authenticated = False

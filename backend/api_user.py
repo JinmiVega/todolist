@@ -19,11 +19,14 @@ ACCESS_TOKEN_EXPIRE_MINUTES = 30
 DB_FILE = "../db/db.json"
 
 class User(BaseModel):
+    name: Optional[str] = None
+    #name: str
     email: EmailStr
     password: str
 
 class UserResponse(BaseModel):
     id: str
+    name: str
     email: str
 
 class Token(BaseModel):
@@ -72,15 +75,19 @@ def register(user: User):
     user_id = str(uuid.uuid4())
     db["users"][user_id] = {
         "id": user_id,
+        "name": user.name,
         "email": user.email,
         "password": get_password_hash(user.password)
     }
     save_db(db)
-    return UserResponse(id=user_id, email=user.email)
+    return UserResponse(id=user_id, name=user.name, email=user.email)
 
 @router.post("/login", response_model=Token)
 def login(user: User):
+    print("hola")
     db = load_db()
+    print(f"Attempting to log in user: {user.email}")
+    
     user_data = next((u for u in db["users"].values() if u["email"] == user.email), None)
     if not user_data or not verify_password(user.password, user_data["password"]):
         raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED, detail="Incorrect email or password")
@@ -94,4 +101,4 @@ def get_profile(current_user_email: str = Depends(verify_token)):
     user_data = next((u for u in db["users"].values() if u["email"] == current_user_email), None)
     if not user_data:
         raise HTTPException(status_code=404, detail="User not found")
-    return UserResponse(id=user_data["id"], email=user_data["email"])
+    return UserResponse(id=user_data["id"], name=user_data["name"], email=user_data["email"])

@@ -6,7 +6,9 @@ def profile_screen():
     
     col1, col2 = st.columns([3, 1])
     with col1:
-        st.write(f"Welcome to your profile, {st.session_state.user_email}!")
+        profile_data = get_user_profile()
+        display_name = profile_data['name'] if profile_data else st.session_state.user_email
+        st.write(f"Welcome to your profile, {display_name}!")
     with col2:
         if st.button("Logout", key="profile_logout"):
             st.session_state.authenticated = False
@@ -19,6 +21,7 @@ def profile_screen():
     profile_data = get_user_profile()
     if profile_data:
         st.subheader("Profile Information")
+        st.write(f"**Name:** {profile_data['name']}")
         st.write(f"**Email:** {profile_data['email']}")
         st.write(f"**User ID:** {profile_data['id']}")
     else:
