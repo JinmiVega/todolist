@@ -18,9 +18,12 @@ ALGORITHM = "HS256"
 ACCESS_TOKEN_EXPIRE_MINUTES = 30
 DB_FILE = "../db/db.json"
 
-class User(BaseModel):
-    name: Optional[str] = None
-    #name: str
+class UserLogin(BaseModel):
+    email: EmailStr
+    password: str
+
+class UserRegister(BaseModel):
+    name: str
     email: EmailStr
     password: str
 
@@ -67,7 +70,7 @@ def verify_token(credentials: HTTPAuthorizationCredentials = Depends(security)):
         raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED, detail="Could not validate credentials")
 
 @router.post("/register", response_model=UserResponse)
-def register(user: User):
+def register(user: UserRegister):
     db = load_db()
     if user.email in [u["email"] for u in db["users"].values()]:
         raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail="Email already registered")
@@ -83,7 +86,7 @@ def register(user: User):
     return UserResponse(id=user_id, name=user.name, email=user.email)
 
 @router.post("/login", response_model=Token)
-def login(user: User):
+def login(user: UserLogin):
     print("hola")
     db = load_db()
     print(f"Attempting to log in user: {user.email}")
