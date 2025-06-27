@@ -1,5 +1,32 @@
 {
   "users": {
+    "2bec3487-930f-4425-9b68-3c39096fba29": {
+      "id": "2bec3487-930f-4425-9b68-3c39096fba29",
+      "email": "a@a.com",
+      "password": "$2b$12$1lbUCfUxX4keY3kbXnxxHuaVPKZUbCy7LbxXkZEZKG7EnUplJcDgW"
+    },
+    "0516a8df-cc09-4798-b262-37ada94f8811": {
+      "id": "0516a8df-cc09-4798-b262-37ada94f8811",
+      "email": "llm@llm.com",
+      "password": "$2b$12$uxaeexgcXbA0LkAjNXUMCuj5WT7mRIO/DACmLm.YSy3Nav39BJD4G"
+    }
   },
-  "todos": {}
+  "todos": {
+    "8e920442-bcb2-483d-b6eb-f663d834797a": {
+      "id": "8e920442-bcb2-483d-b6eb-f663d834797a",
+      "title": "tarea1",
+      "description": "aaaa",
+      "completed": false,
+      "user_id": "2bec3487-930f-4425-9b68-3c39096fba29",
+      "created_at": "2025-06-27T17:45:30.156379"
+    },
+    "9a5a7751-3356-4d89-8997-ee1993065245": {
+      "id": "9a5a7751-3356-4d89-8997-ee1993065245",
+      "title": "tarea2",
+      "description": "aaaa",
+      "completed": false,
+      "user_id": "2bec3487-930f-4425-9b68-3c39096fba29",
+      "created_at": "2025-06-27T17:45:34.389129"
+    }
+  }
 }
