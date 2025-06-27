@@ -35,7 +35,9 @@ def login_register_screen():
             
             if register_button:
                 if reg_name and reg_email and reg_password and reg_password_confirm:
-                    if reg_password == reg_password_confirm:
+                    if len(reg_password) < 5:
+                        st.error("Password must be at least 5 characters long")
+                    elif reg_password == reg_password_confirm:
                         success, message = register_user(reg_name, reg_email, reg_password)
                         if success:
                             st.success(message)

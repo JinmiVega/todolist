@@ -1,6 +1,6 @@
 from fastapi import APIRouter, Depends, HTTPException, status
 from fastapi.security import HTTPBearer, HTTPAuthorizationCredentials
-from pydantic import BaseModel, EmailStr
+from pydantic import BaseModel, EmailStr, Field
 from datetime import datetime, timedelta
 from typing import Optional
 import jwt
@@ -25,7 +25,7 @@ class UserLogin(BaseModel):
 class UserRegister(BaseModel):
     name: str
     email: EmailStr
-    password: str
+    password: str = Field(..., min_length=5, description="Password must be at least 5 characters long")
 
 class UserResponse(BaseModel):
     id: str
