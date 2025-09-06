@@ -30,6 +30,19 @@ python -m venv venv
 source venv/bin/activate  # On Windows: venv\Scripts\activate
 ```
 
+### Testing and Development
+```bash
+# No automated tests currently implemented
+# Manual testing via frontend UI or API documentation at http://localhost:8000/docs
+
+# Development workflow - run both servers concurrently:
+# Terminal 1: Backend
+cd backend && python main.py
+
+# Terminal 2: Frontend  
+cd frontend && streamlit run main.py
+```
+
 ## Architecture Overview
 
 ### Backend Structure
@@ -95,3 +108,12 @@ JSON structure in `db/db.json`:
 - No database migrations or schema validation
 - Frontend uses st.rerun() after state changes to refresh UI
 - API client includes automatic error handling for connection issues
+
+## Key Dependencies
+- **fastapi**: Web framework for backend API
+- **streamlit**: Frontend web app framework  
+- **uvicorn**: ASGI server for FastAPI
+- **python-jose**: JWT token handling
+- **passlib[bcrypt]**: Password hashing
+- **pydantic**: Data validation
+- **requests**: HTTP client for frontend-backend communication
