@@ -31,7 +31,10 @@ Una aplicación completa de lista de tareas con FastAPI backend y Streamlit fron
 0. Crea un entorno virtual (opcional pero recomendado):
 ```
 python -m venv venv
-source venv/bin/activate  # En Windows: venv\Scripts\activate
+source venv/bin/activate 
+# En Windows : 
+source venv/Scripts/activate
+
 ```
 
 1. Instalar dependencias:
